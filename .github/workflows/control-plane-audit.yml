@@ -1,0 +1,36 @@
+# Control Plane 稽核。**這是唯一擋得住 `git commit --no-verify` 的一層。**
+#
+# 本機的 pre-commit 與 PreToolUse hook 都是快速回饋，一個旗標就能關掉。
+# 只有伺服器端的 required check 會在合併前重新檢查一次歷史。
+#
+# `fetch-depth: 0` 不能拿掉：淺 checkout 算不出 merge-base，稽核會因為
+# 算不出範圍而略過 —— 一個永遠綠的 required check 比沒有還糟。
+name: Control Plane Audit
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  control-plane-audit:
+    name: control-plane-audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Audit Control Plane history
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -n "${GITHUB_BASE_REF:-}" ]]; then
+            BASE="$(git merge-base "origin/${GITHUB_BASE_REF}" HEAD)"
+          else
+            BASE="$(git rev-parse HEAD^)"
+          fi
+          python3 workflow/bin/audit-control-plane.py "$BASE" HEAD

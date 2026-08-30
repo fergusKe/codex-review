@@ -1,0 +1,30 @@
+# 形狀依 workflow/CI.md：互不依賴的工作平行跑，不串成一條。
+#
+# 這裡執行的指令必須與 PROJECT-PROFILE.md 的 `Custom verification command` 一致。
+# tests/test_shipped_config_and_ci.py 的 T9.3 會從 profile 讀出來比對 ——
+# 改了 profile 卻忘了改這裡，測試會紅。
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+
+jobs:
+  unit:
+    name: test-suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Run test suite
+        run: python3 -m unittest discover -s . -p 'test_*.py'

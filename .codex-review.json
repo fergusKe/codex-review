@@ -1,0 +1,4 @@
+{
+  "constraint": "審查範圍是 codex-review 這個 repository。**不得修改本 repository 底下任何檔案** —— 不新增、不編輯、不刪除、不執行任何會寫入磁碟的指令。我會在你回覆後比對前後的檔案快照（含未追蹤檔案），任何改動都會讓這一輪的結論作廢，並且代表 repository 已被污染、需要清理。請只以文字回報你的發現。",
+  "archive_dir": "reviews"
+}
