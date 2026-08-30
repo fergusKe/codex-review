@@ -57,28 +57,28 @@ SPECIFICATION 可以提出方案，SPEC_REVIEW 才向人類收取決策。**
 
 **定案之後要改，必須回 SPECIFICATION 修訂 ADR/OpenSpec 並重新 review**，
 不是原地改這個檔案。原因：`UNKNOWN → 具體值` 不是單調收緊 ——
-`Test database strategy: UNKNOWN → NOT_APPLICABLE` 其實是放寬，
+`Test database strategy: not-applicable → NOT_APPLICABLE` 其實是放寬，
 machine 只能證明格式與來源，不能授權「選擇」。
 
-Mode: UNSET
+Mode: GREENFIELD
 # GREENFIELD | BROWNFIELD
 
-Type: UNKNOWN
+Type: CLI
 # WEB_APP | API | CLI | LIBRARY | MOBILE | OTHER
 
-Web verification required: auto
+Web verification required: no
 # auto | yes | no
 # Type=WEB_APP 時，即使填 no，Web Gate 仍會啟用。
 # 明確非 Web（API/CLI/LIBRARY 等）請填 no；auto 表示未決並 fail-closed。
 
-Core verification policy: auto
+Core verification policy: custom
 # auto | custom | not-applicable
 # auto           ：執行 Starter 能辨識的 checks；零 runnable checks 時失敗。
 # custom         ：改用專案自己的驗證入口，必須真的執行並記錄結果。
 # not-applicable ：純文件或刻意沒有 automated verification 的 repo；
 #                  必須填寫非空的 Verification exception reason，且不會標記為 PASS。
 
-Custom verification command: none
+Custom verification command: python3 -m unittest discover -s . -p 'test_*.py'
 Verification exception reason: none
 
 ## Critical user journeys
@@ -95,10 +95,10 @@ WEB 專案以 browser evidence 對應（`J1: PASS`）。
 CLI / LIBRARY 等沒有對外流程的專案維持「尚未定義」即可。 -->
 
 ## Repository
-Primary stack: UNKNOWN
-Package manager: UNKNOWN
-Monorepo: UNKNOWN
-CI provider: UNKNOWN
+Primary stack: Python 3.9+（僅標準函式庫）
+Package manager: none（無外部相依）
+Monorepo: no
+CI provider: GitHub Actions
 
 ## Testing
 Test database strategy: UNKNOWN
