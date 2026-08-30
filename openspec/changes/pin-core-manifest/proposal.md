@@ -39,3 +39,17 @@ AssertionError: '' is not true : 找不到第一輪的封存 commit
 - 不改 R1–R10 任何一條的行為。
 - 不動 `codexreview/` 的產品邏輯。
 - 不加新功能。
+
+
+## 修訂紀錄
+
+- **R12 的做法在實作階段被推翻並重寫。** 原本寫的是
+  `git clone --depth 1 file://<repo>` —— clone 的是 HEAD，而 pre-commit 執行時
+  HEAD 還是上一個 commit。結果是這道守衛在一個**目前違反它**的 repository 裡
+  永遠無法被加進去：修正它的那個 commit 會被自己擋下來，唯一出路是 `--no-verify`。
+
+  這是同一類錯誤的**第三次**：判準綁到了環境碰巧成立的性質（HEAD 的內容），
+  而不是綁到真正要檢查的東西（即將提交的內容）。R11 與 R12 現在都讀 index。
+
+  發現後走 `revert-to-spec` 回 SPECIFICATION 重新取得批准，
+  沒有先改程式再補文件。
