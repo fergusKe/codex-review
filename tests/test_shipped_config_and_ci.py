@@ -208,23 +208,9 @@ class AuditWorkflow(unittest.TestCase):
                                 '稽核放行了未經批准的產品變更：\n' + r.stdout + r.stderr)
 
 
-class UnchangedFirstRound(unittest.TestCase):
-    """回歸：這一輪不得改動第一輪封存的程式。
-
-    寫在 spec 裡是一句規範；比對 blob hash 才讓它變成一個會失敗的檢查。
-    """
-
-    def test_TR_2_codexreview_blobs_match_archive_commit(self):
-        arch = subprocess.run(['git', '-C', str(ROOT), 'log', '--format=%H', '-1',
-                               '--grep=archive review-round-runner'],
-                              capture_output=True, text=True).stdout.strip()
-        self.assertTrue(arch, '找不到第一輪的封存 commit')
-        def tree(ref):
-            out = subprocess.run(['git', '-C', str(ROOT), 'ls-tree', '-r', ref, 'codexreview/'],
-                                 capture_output=True, text=True).stdout
-            return {l.split('\t')[1]: l.split()[2] for l in out.splitlines() if l}
-        self.assertEqual(tree(arch), tree('HEAD'),
-                         'codexreview/ 相對第一輪封存有變動，違反本輪的「不變的部分」')
+# TR.2（比對第一輪封存 commit）已移除，由 tests/test_core_manifest.py 的 T11.2 取代。
+# 鎖的對象從「歷史上的某個 commit」換成「一份 checked-in 的紀錄」——
+# 因為前者需要祖先歷史，而 CI 的 checkout 是淺的。取捨寫在 R11。
 
 
 if __name__ == '__main__':

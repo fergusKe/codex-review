@@ -1,0 +1,15 @@
+# core-manifest.txt —— codexreview/ 的內容鎖
+#
+# 由 `python3 tools/gen-core-manifest.py --write` 產生，不要手改。
+# 格式：<blob hash><tab><path>，依 path 排序。
+#
+# 這份紀錄被改動時，diff 會明確顯示出來 —— 那正是它的用途：
+# 它擋不住有意的變更，但讓變更無法安靜地發生。
+f0f8f840ef5507f012c8e7ea46108fd9b8565cdf	codexreview/__init__.py
+04ffd97cc3244ccebde23d83c79fa5718fe51b4b	codexreview/archive.py
+e14e59015d234af6122d48b29b8df414a6efa2a8	codexreview/cli.py
+f4235a44f396889029cf8244f21e3cdf346ae7b9	codexreview/config.py
+d2e47d6b9bc55e8372639018d47caba5b164bb3c	codexreview/runner.py
+bb7a87116dda3504d9287935e8e9c9ae51f12992	codexreview/snapshot.py
+8a8520d5e2fa058d4b59af917fc3684682b98c9d	codexreview/verdict.py
+5c08ffab916e52f4947572652bbd836e4b707e44	codexreview/worker.py

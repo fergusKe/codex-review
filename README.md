@@ -71,6 +71,26 @@ python3 -m codexreview.cli status
 python3 -m unittest discover -s . -p 'test_*.py'
 ```
 
+### 改動 `codexreview/` 之後要重新產生內容鎖
+
+`core-manifest.txt` 記錄 `codexreview/` 每個檔案的 blob hash。
+它擋不住有意的變更 —— 它讓變更**無法安靜地發生**：改了程式卻沒更新鎖，
+測試會紅；更新了鎖，diff 裡就會有一筆明確的紀錄給 review 看。
+
+```bash
+git add codexreview/                          # 鎖比對的是 index，不是 HEAD
+python3 tools/gen-core-manifest.py --write
+```
+
+### 測試套件不得依賴 git 歷史
+
+有一條測試（`tests/test_core_manifest.py`）會把 index 具現化成一個
+**只有單一 commit** 的 repository，在裡面跑完整套件。理由：CI 的
+`actions/checkout` 是淺 clone，任何用 `git log` / `rev-list` / `--grep`
+查祖先歷史的測試在 CI 上都會紅，而在你的機器上永遠是綠的。
+
+這條守衛存在，是因為這件事已經發生過一次。
+
 本專案以 [ai-project-starter](https://github.com/fergusKe/ai-project-starter) 的
 規格驅動流程開發：規格與測試設計經人類批准後才進入實作，
 見 `openspec/changes/` 與 `workflow/test-cases/`。
