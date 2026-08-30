@@ -258,3 +258,13 @@
 - State hash: f5a0d0d3c9d244254ebfb00f2caaf9d500b4f8d90acfa363badfd992abc41abe
 - Reason: Human approved specification; profile digest 6d11e609f2d26f11; spec digest 61a44982fc982946
 
+## 2026-08-30T18:12:54+08:00
+- Actor: fergus
+- Action: approve-tests
+- Change: pin-core-manifest
+- From: TEST_DESIGN
+- To: TEST_DESIGN
+- Git SHA: 345e3bf6b1c2ebff9e9c9298775afb5345927416
+- State hash: 0eead17197f4647059bc87006924784558bb639c52de787ce00b481321773f86
+- Reason: Human approved test design; digest ff2c2d67f154b4b3
+
