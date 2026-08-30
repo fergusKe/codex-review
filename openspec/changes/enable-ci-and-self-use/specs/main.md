@@ -7,6 +7,12 @@ repository 根目錄有 `.codex-review.json`，內容至少包含非空的 `cons
 - 在乾淨的 checkout 上執行 `python3 -m codexreview.cli status` 必須成功（不得因缺設定而失敗）
 - `constraint` 的內容必須包含「不得修改本 repository」的意思 —— 這是工具的核心約束，
   不能只是一個佔位字串
+- **`constraint` 不得含有本機絕對路徑。** 這份設定檔會被 clone 到別人的機器上，
+  路徑寫死等於：(a) 換一個資料夾名稱就失效，(b) 把作者的目錄結構寫進 public repo。
+  約束要靠「本 repository」這種相對於受審對象的說法來限定範圍，不是靠檔案系統位置。
+
+  > 這一條是實作階段跑突變測試時發現的：原本的判準要求含絕對路徑，
+  > 結果在 `git worktree` 裡基準線就是紅的 —— 而 worktree 正是本專案推薦的做法。
 
 ## R9 CI 執行完整測試套件
 
