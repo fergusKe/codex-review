@@ -57,7 +57,7 @@ SPECIFICATION 可以提出方案，SPEC_REVIEW 才向人類收取決策。**
 
 **定案之後要改，必須回 SPECIFICATION 修訂 ADR/OpenSpec 並重新 review**，
 不是原地改這個檔案。原因：`UNKNOWN → 具體值` 不是單調收緊 ——
-`Test database strategy: not-applicable → NOT_APPLICABLE` 其實是放寬，
+`Test database strategy: UNKNOWN → NOT_APPLICABLE` 其實是放寬，
 machine 只能證明格式與來源，不能授權「選擇」。
 
 Mode: GREENFIELD
@@ -101,7 +101,7 @@ Monorepo: no
 CI provider: GitHub Actions
 
 ## Testing
-Test database strategy: UNKNOWN
+Test database strategy: not-applicable
 # UNKNOWN | not-applicable | separate-database | transaction-rollback
 #         | ephemeral-container | schema-per-worker | other: <描述>
 # not-applicable 表示這個 repo 沒有資料庫。清單以外的隔離手法請用
