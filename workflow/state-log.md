@@ -341,3 +341,13 @@
 - Browser evidence sha256: f6efbf0df9bebf2e2c4aa23cd99f36e67e773e2e9e674af5e9aec62a0d38566b
 - Reason: Core/browser/API evidence validated
 
+## 2026-08-30T18:52:13+08:00
+- Actor: machine-verified
+- Action: archive
+- Change: pin-core-manifest
+- From: VERIFICATION
+- To: ARCHIVE
+- Git SHA: daadade36cf2ee281ace2aad28b8bed56cee7401
+- State hash: 452eb84d6461088c2e86fd5d4ec8e96603012cd9bbd1abf286fa6f7cd782a381
+- Reason: Evidence complete
+
