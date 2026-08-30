@@ -218,3 +218,13 @@
 - Browser evidence sha256: f6efbf0df9bebf2e2c4aa23cd99f36e67e773e2e9e674af5e9aec62a0d38566b
 - Reason: Core/browser/API evidence validated
 
+## 2026-08-30T17:52:46+08:00
+- Actor: machine-verified
+- Action: archive
+- Change: enable-ci-and-self-use
+- From: VERIFICATION
+- To: ARCHIVE
+- Git SHA: 50f8e3f1198a7f8fff88fe0732f86b2357b6e018
+- State hash: 453af3bba7f310025fccc023fa976abce15822411cccd4c3efe976417a5826e2
+- Reason: Evidence complete
+
