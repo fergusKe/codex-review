@@ -22,3 +22,13 @@
 - State hash: 2632123a01a5c6e77db22b6ad553925a08db7a35d96cc6c7eaebf52f3a8a004b
 - Reason: Active change bound
 
+## 2026-08-30T16:16:56+08:00
+- Actor: machine-verified
+- Action: submit-for-review
+- Change: review-round-runner
+- From: SPECIFICATION
+- To: SPEC_REVIEW
+- Git SHA: 5f1b58e3afca7133af624c53e01e2a78dbdae575
+- State hash: 9e337ab4174931eeb980efd17bff6cfce2631f548ad44759c6b7e3933460d896
+- Reason: Required OpenSpec artifacts exist
+
