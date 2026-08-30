@@ -155,3 +155,13 @@
 - State hash: 493cbaf6953430e8a1c879da76c958711c3b3015d89395f62451c13a21457e2e
 - Reason: Approval prerequisites satisfied; profile digest re-verified
 
+## 2026-08-30T17:36:24+08:00
+- Actor: ai-or-human
+- Action: revert-to-spec
+- Change: enable-ci-and-self-use
+- From: ENGINEERING
+- To: SPECIFICATION
+- Git SHA: c5819fa80911ec9829e9de023b40c8eed1040988
+- State hash: b26a57a357614e0c5528a6c666146b58d20188f14fe6d0715b8de04d8c553b48
+- Reason: T8.3 驗收標準要求 constraint 含本機絕對路徑，導致出貨設定檔不可攜；worktree 與任何非同名 clone 皆會失敗。需改為 repository 範圍判準並新增「不得含絕對路徑」的負向要求。
+
