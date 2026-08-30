@@ -65,3 +65,37 @@ Tests workflow 綠燈，並把 run id 留下來。
 要讓「伺服器端綠燈」成為真正的 evidence，得在 Starter 新增一種 evidence 型別，
 那是跨生命週期的改動；Starter 目前凍結在 v1.0-rc.5。**在那之前 R13 只有規範，
 沒有機制** —— 這一行本身就是它的紀錄。
+
+## 伺服器端執法層（已實測）
+
+`main` 受 Branch Ruleset `Protect main` 保護，2026-08-30 設定並實測。
+
+| 項目 | 值 |
+|---|---|
+| Ruleset id | `21856100` |
+| Enforcement | **active** |
+| Target | `refs/heads/main` |
+| Required checks | `test-suite`、`control-plane-audit` |
+| Require branches up to date | 是 |
+| 其他規則 | `pull_request`、`deletion`、`non_fast_forward` |
+| **Bypass actors** | **空 —— 沒有任何人可以 override，包含 repository owner** |
+
+### 實測紀錄
+
+依 `workflow/MERGE-PROTECTION.md`〈驗證：沒實測過的防線不算防線〉，
+在 PR #1 上跑過失敗情境：
+
+1. 用 `git commit --no-verify` 繞過本機所有 gate，推一條故意失敗的測試
+2. `test-suite` 紅燈；`control-plane-audit` 也紅 —— 它認出這是
+   **ARCHIVE 階段的未授權產品變更**（`A: tests/test_zz_merge_protection_drill.py`）
+3. `mergeStateStatus` 由 `UNSTABLE` 變 `BLOCKED`，**Merge 按鈕變灰**（API 與目視雙重確認）
+
+`control-plane-audit` 只在 `pull_request` 觸發，**PR #1 是它第一次真的執行**。
+在此之前它是一個從未被證明會動的 required check。
+
+驗證後 PR 關閉、分支刪除。
+
+### 後果
+
+`main` 不再能直接 push。所有變更都要走 PR 並通過兩個 check ——
+包含 Control Plane 的 transition commit。
