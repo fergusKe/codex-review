@@ -44,3 +44,24 @@ git ls-files -z | xargs -0 shasum -a 256
 - 審查者以唯讀沙箱執行；本工具不放寬那個設定。
 - 一輪可能超過十分鐘，必須背景執行。
 - 工作樹不乾淨時不得開始 —— 否則「零改動」無法與「我自己的編輯」區分。
+
+## 伺服器端綠燈紀錄
+
+`openspec/changes/pin-core-manifest` 的 R13 要求 archive 之前先看到 `main` 的
+Tests workflow 綠燈，並把 run id 留下來。
+
+| Change | Head SHA | Run id | Conclusion |
+|---|---|---|---|
+| `pin-core-manifest` | `87a47c5` | `33307431118` | success |
+
+前一次（`e515ca7`）是 failure —— 就是本 change 修掉的那條依賴 git 歷史的測試。
+
+**紀錄放在這裡而不是 `workflow/evidence/`，是因為 Control Plane 的 evidence
+命名空間是封閉的**：只認 `core/<timestamp>.md`、`browser.md`、`api.md` 三種，
+其餘路徑在 VERIFICATION 會被當成未授權的產品變更擋下（實測 DENY）。
+放進 `openspec/changes/<change>/` 也不行 —— 那會改變 change 的內容 digest，
+讓人類批准失效（實測 archive 被擋）。
+
+要讓「伺服器端綠燈」成為真正的 evidence，得在 Starter 新增一種 evidence 型別，
+那是跨生命週期的改動；Starter 目前凍結在 v1.0-rc.5。**在那之前 R13 只有規範，
+沒有機制** —— 這一行本身就是它的紀錄。
