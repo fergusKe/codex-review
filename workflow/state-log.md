@@ -288,3 +288,13 @@
 - State hash: 2ff6786468fff9e9e796c29545fa47cda5e1345dc011296fe3f822e293ea1152
 - Reason: T12 的做法在淺 clone 上讀 HEAD，導致修正它的那個 commit 永遠無法通過 pre-commit
 
+## 2026-08-30T18:19:16+08:00
+- Actor: machine-verified
+- Action: submit-for-review
+- Change: pin-core-manifest
+- From: SPECIFICATION
+- To: SPEC_REVIEW
+- Git SHA: 8f6fd9e62a57e289fd90ba6ce59e47215eaf6830
+- State hash: 471760756c20b1f07f14fb7de3c177df8c269f38ebae5d6e7f7872fa091a9463
+- Reason: Required OpenSpec artifacts exist
+
