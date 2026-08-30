@@ -238,3 +238,13 @@
 - State hash: a63ec5f13c8756335779bd48da94b17843b5d229bce05b8d15674322a377e877
 - Reason: Active change bound
 
+## 2026-08-30T18:01:07+08:00
+- Actor: machine-verified
+- Action: submit-for-review
+- Change: pin-core-manifest
+- From: SPECIFICATION
+- To: SPEC_REVIEW
+- Git SHA: f6ac5e05152ab38b1fe04296c3d6a7a24d420144
+- State hash: cfcf5522777442faa6892fe6e72f66683fde31de91f4d59f730e0646bbc56e3d
+- Reason: Required OpenSpec artifacts exist
+
