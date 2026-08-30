@@ -205,3 +205,16 @@
 - State hash: 5e71f72ce8012a1250be08543ddab6d0ff350bc05afc9c2f8b1d7f7e0117f6d9
 - Reason: Approval prerequisites satisfied; profile digest re-verified
 
+## 2026-08-30T17:51:29+08:00
+- Actor: machine-verified
+- Action: verification-pass
+- Change: enable-ci-and-self-use
+- From: ENGINEERING
+- To: VERIFICATION
+- Git SHA: 4201a0081ab97ec1749e365708f404e97299d4f3
+- State hash: 10b68cd4ac9962fdf78bdda144a838c007e42e349193ae743f19cbcf3b448b2b
+- Core evidence: workflow/evidence/enable-ci-and-self-use/core/20260830T095129453828Z.md
+- Core evidence sha256: 2a041864adf5232be6e93edce76b3d8bae8c23f346c87ffa2225af6ccf842444
+- Browser evidence sha256: f6efbf0df9bebf2e2c4aa23cd99f36e67e773e2e9e674af5e9aec62a0d38566b
+- Reason: Core/browser/API evidence validated
+
