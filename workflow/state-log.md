@@ -165,3 +165,13 @@
 - State hash: b26a57a357614e0c5528a6c666146b58d20188f14fe6d0715b8de04d8c553b48
 - Reason: T8.3 驗收標準要求 constraint 含本機絕對路徑，導致出貨設定檔不可攜；worktree 與任何非同名 clone 皆會失敗。需改為 repository 範圍判準並新增「不得含絕對路徑」的負向要求。
 
+## 2026-08-30T17:36:53+08:00
+- Actor: machine-verified
+- Action: submit-for-review
+- Change: enable-ci-and-self-use
+- From: SPECIFICATION
+- To: SPEC_REVIEW
+- Git SHA: 03809f19ac5627f79900a2e4287d33d24a1bbd61
+- State hash: 0198d54b14d1b09bcb29fbf4097ba6c322c9fe6b8833ceaed476e39dd7bbb3b7
+- Reason: Required OpenSpec artifacts exist
+
