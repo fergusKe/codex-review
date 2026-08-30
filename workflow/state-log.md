@@ -228,3 +228,13 @@
 - State hash: 453af3bba7f310025fccc023fa976abce15822411cccd4c3efe976417a5826e2
 - Reason: Evidence complete
 
+## 2026-08-30T18:00:56+08:00
+- Actor: machine-verified
+- Action: start-change
+- Change: pin-core-manifest
+- From: ARCHIVE
+- To: SPECIFICATION
+- Git SHA: e515ca73a644afbd6a3e66f00b0f449beceb16a3
+- State hash: a63ec5f13c8756335779bd48da94b17843b5d229bce05b8d15674322a377e877
+- Reason: Active change bound
+
