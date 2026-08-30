@@ -6,10 +6,10 @@ Phase: TEST_DESIGN
 Project mode: GREENFIELD
 Active OpenSpec change: review-round-runner
 Spec approved: yes
-Test design approved: no
+Test design approved: yes
 Verification passed: no
 Approved by: fergus
 Approved profile digest: 6d11e609f2d26f116d551a881ceb8b3d5a17da6616605106ca46fa6569528297
 Approved spec digest: 4fd34056c652246cd8b87cfd09ca5cb3c115af599f18fe5a49e6d709031c729c
-Approved test design digest: none
-Last updated: 2026-08-30T16:21:52+08:00
+Approved test design digest: 5a1bbbd328589698e8151377487accfdc6cca1d64418916fcf633e080e8e740e
+Last updated: 2026-08-30T16:54:16+08:00
