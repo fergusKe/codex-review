@@ -328,3 +328,16 @@
 - State hash: a99670291f96905fd62eabbe2d1cb178c08f1aa31ff057f2fbcdc7487811c3f0
 - Reason: Approval prerequisites satisfied; profile digest re-verified
 
+## 2026-08-30T18:49:36+08:00
+- Actor: machine-verified
+- Action: verification-pass
+- Change: pin-core-manifest
+- From: ENGINEERING
+- To: VERIFICATION
+- Git SHA: 02668abbf7bf3a3f550fbe098bfd147f43f3def7
+- State hash: ef24107ed1acd1fa950f22015e1b4c0862944dac9299193112fc6f5ac506d8d3
+- Core evidence: workflow/evidence/pin-core-manifest/core/20260830T104936731789Z.md
+- Core evidence sha256: a417b1065240e8ba646aec692f266bd1db0ec4120d92e92424c31e562396ba84
+- Browser evidence sha256: f6efbf0df9bebf2e2c4aa23cd99f36e67e773e2e9e674af5e9aec62a0d38566b
+- Reason: Core/browser/API evidence validated
+
