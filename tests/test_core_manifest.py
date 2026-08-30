@@ -122,6 +122,16 @@ def _run_suite(cwd: Path) -> subprocess.CompletedProcess:
                           cwd=cwd, capture_output=True, text=True, env=env)
 
 
+def _quote(r: subprocess.CompletedProcess) -> str:
+    """把子行程的輸出每行加上 `| ` 前綴。
+
+    子行程跑的是同一套測試，它的 `FAIL: test_...` 行與外層的長得一模一樣。
+    直接貼進失敗訊息裡，任何掃輸出判斷「哪幾條測試紅了」的工具都會把子行程的
+    失敗算到外層頭上 —— 突變測試的結果會因此完全失真。實測踩過一次。
+    """
+    return '\n'.join('| ' + l for l in (r.stdout + r.stderr).splitlines())
+
+
 @unittest.skipIf(CHILD, '子行程內跳過，避免無限遞迴')
 class NoAncestryCheckout(unittest.TestCase):
     """R12：整套測試必須在沒有祖先歷史的 checkout 上跑得完。
@@ -141,7 +151,7 @@ class NoAncestryCheckout(unittest.TestCase):
             self.assertEqual(n, '1', f'不是單一 commit（{n} 個），這條測試沒有在驗它宣稱的事')
             r = _run_suite(dest)
             self.assertEqual(r.returncode, 0,
-                             '測試套件在無祖先歷史的 checkout 上失敗：\n' + r.stdout + r.stderr)
+                             '測試套件在無祖先歷史的 checkout 上失敗：\n' + _quote(r))
 
     def test_T12_3_history_dependent_test_is_caught(self):
         """對照組：放回一條依賴 `git log --grep` 的測試，上面那條必須抓到。
