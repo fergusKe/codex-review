@@ -1,64 +1,76 @@
-# AI Project Starter
+# codex-review
 
-> Release candidate: **v1.0.0-rc.5**  
-> G3 兩場端對端試跑已完成（見 G3-A / G3-B run report）。
-> Final v1.0 仍需完成：G4 文件 cold-start，以及 rc.5 diff 的 scoped reviewer sign-off。
+對抗性審查迴圈的執行器。它負責**證據**，不負責判斷。
 
-給 Claude Code、Codex 與其他 AI Coding Agent 使用的規格驅動開發 Starter。
+## 為什麼存在
 
-**不知道下一步該做什麼？** 先執行 `python3 workflow/bin/workflow_transition.py status`，
-再看 `START-HERE.md` 的「每個階段該做什麼」對照表。
+用另一個 AI 對程式碼做對抗性審查時，每一輪都要做四件事：貼約束、取快照、比對快照、
+存回覆。手動做的問題不是麻煩，是**它可以安靜地做錯**。
 
-```text
-Discovery → OpenSpec → Human Spec Review → Test Design
-→ Superpowers Engineering → Verification → Archive
-```
-
-Web 專案在 Engineering 期間可反覆執行 Browser Verification；最後的 Final Verification 只檢查其 evidence，不重複做同一件事。
-
-## 開始
+實際跑了十九輪之後才發現，用的快照指令是：
 
 ```bash
-bash ./workflow/bin/bootstrap.sh
+git ls-files -z | xargs -0 shasum -a 256
 ```
 
-然後：
+而 `git ls-files` **只列 tracked 檔案**。審查者若新增一個未追蹤的檔案，前後快照完全
+相同，使用者會得到「零改動」的結論。這個洞在十九輪裡從未被觸發 ——
+**那不等於它被檢查過。**
+
+## 用法
 
 ```bash
-python3 workflow/bin/workflow_transition.py doctor
-python3 workflow/bin/workflow_transition.py status
+# 1. 設定檔（constraint 不得為空）
+cat > .codex-review.json <<'JSON'
+{
+  "constraint": "不要修改本 repository 底下任何檔案，我會前後比對 SHA-256。",
+  "session_id": "選填：延續既有的審查對話",
+  "archive_dir": "reviews"
+}
+JSON
+
+# 2. 送出一輪（背景執行，立即返回）
+python3 -m codexreview.cli run -f round-05.md
+
+# 3. 查狀態與判定
+python3 -m codexreview.cli status
 ```
 
-讓 AI 讀取 `AGENTS.md`、`workflow/STATE.md`、`PROJECT-PROFILE.md`、`CONTEXT.md` 與 active OpenSpec change。
+## 三種判定
 
-## 核心責任
+| 結果 | 意義 |
+|---|---|
+| `CLEAN` | 零改動，本輪結論可信 |
+| `TAMPERED` | **兩件事同時發生**：結論失效，且 repository 已被污染，列出所有變動路徑 |
+| `INCOMPLETE` | 審查未正常結束，**不對完整性做任何宣稱** |
 
-- `AGENTS.md`：唯一 normative workflow 規範
-- `workflow/STATE.md`：Control Plane state
-- `workflow/state-log.md`：transition audit log
-- `workflow/bin/workflow_transition.py`：唯一合法 state transition 入口
-- `workflow/GATES.md`：Gate 判準與信任邊界
-- `PROJECT-PROFILE.md`：Project mode/type/critical journeys
-- `workflow/evidence/`：verification evidence
-- `.claude/hooks/`：Claude 即時回饋層
-- pre-commit：Repository enforcement layer
+`INCOMPLETE` 單獨存在是刻意的：併進 `TAMPERED` 會產生假警報，併進 `CLEAN`
+會產生假保證，兩者都比誠實地說「不知道」更糟。
 
-OpenSpec 管「要做什麼」；Superpowers 管「怎麼可靠地做出來」。
+## 設計上的幾個決定
 
+**唯讀沙箱寫死，沒有放寬的介面。** 能被旗標關掉的防線不是防線；而會去關它的人，
+多半正是最不該關它的那個。
 
-相容別名：`bash workflow/bin/check-workflow.sh` 等同 transition CLI 的 `status`。
+**工作樹不乾淨就拒絕開始。** 否則「審查後有改動」無法與「你自己的編輯」區分。
+檢查在執行**之前** —— 跑過之後才發現，事情已經發生了。
 
+**歸檔不覆寫。** 稽核紀錄被蓋掉的時候，正是最需要它的時候。
 
-Starter 維護者自我測試：`STARTER_SELF_TESTS=1 bash workflow/bin/verify.sh --full`。採用者一般 commit 預設不執行 Starter self-tests。
+**快照只排除本輪自己寫的三個檔案**，不排除整個歸檔目錄 ——
+審查者去改舊輪次的紀錄是最該被抓到的事。
 
+## 不做的事
 
-### Brownfield 既有 Control Plane
-若專案已追蹤 `.claude/settings.json`、`.claude/hooks/**`、`.githooks/**` 或 `workflow/**`，bootstrap 會在 commit 前停止，不會自動覆蓋。請人工合併、stage 後使用 `python3 workflow/bin/workflow_transition.py adopt-control-plane --dry-run` 檢查，再由人類執行 `adopt-control-plane`。
+不判斷 blocker 真偽、不決定收斂線、不管理審查者的安裝與登入。
+審查結論由人判讀。
 
-Brownfield 可先執行 `python3 workflow/bin/workflow_transition.py check-install-conflicts`；它會分開列出既有 Control Plane conflicts 與 tracked Starter-file overwrites。不要在檢查前直接覆蓋既有、未追蹤或被 ignore 的 `.claude/` / `.githooks/` 檔案。
+## 開發
 
-若屬 tracked Starter-file overwrite（例如既有 `README.md` / `.gitignore` / `CLAUDE.md`），每個檔案可選擇採用 Starter 版本、保留原版或手動合併；處理後必須先以一般 commit 保存，例如 `git commit -m "chore: reconcile starter files"`，再重新執行 bootstrap。只 stage 而不 commit 會再次被 preflight 擋下。
+```bash
+python3 -m unittest discover -s . -p 'test_*.py'
+```
 
-
-## 已知限制
-完整信任邊界與限制見 `workflow/GATES.md`。特別注意：Playwright HTML report 是本機 artifact、`.claude/**` 即時 hook 只保證 Claude Code 層、非 Node/Python stack 需自行擴充 `verify.sh` checks。
+本專案以 [ai-project-starter](https://github.com/fergusKe/ai-project-starter) 的
+規格驅動流程開發：規格與測試設計經人類批准後才進入實作，
+見 `openspec/changes/` 與 `workflow/test-cases/`。
