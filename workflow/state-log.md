@@ -52,3 +52,13 @@
 - State hash: 1763b1e0bc0309aa5372e4c95654da0a77f689e082ba08e1ab0cc55406ce1f6e
 - Reason: Required OpenSpec artifacts exist
 
+## 2026-08-30T16:21:52+08:00
+- Actor: fergus
+- Action: approve-spec
+- Change: review-round-runner
+- From: SPEC_REVIEW
+- To: TEST_DESIGN
+- Git SHA: 84eba9596df3ee2ed95cc601bf78043d985dc3e0
+- State hash: 5762d16e7d62bacac845c40eadb3d9d6f3cb0e77062bb2f13368542d0ab4bdad
+- Reason: Human approved specification; profile digest 6d11e609f2d26f11; spec digest 4fd34056c652246c
+

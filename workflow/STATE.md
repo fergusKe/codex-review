@@ -2,14 +2,14 @@
 > 本檔是 Control Plane。不得手動編輯；請使用 `python3 workflow/bin/workflow_transition.py ...`。
 > `Implementation allowed` 為推導值，不儲存在 STATE：僅當 Phase=ENGINEERING 且 Spec/Test Design 均 approved 時為 true。
 
-Phase: SPEC_REVIEW
+Phase: TEST_DESIGN
 Project mode: GREENFIELD
 Active OpenSpec change: review-round-runner
-Spec approved: no
+Spec approved: yes
 Test design approved: no
 Verification passed: no
-Approved by: none
-Approved profile digest: none
-Approved spec digest: none
+Approved by: fergus
+Approved profile digest: 6d11e609f2d26f116d551a881ceb8b3d5a17da6616605106ca46fa6569528297
+Approved spec digest: 4fd34056c652246cd8b87cfd09ca5cb3c115af599f18fe5a49e6d709031c729c
 Approved test design digest: none
-Last updated: 2026-08-30T16:18:21+08:00
+Last updated: 2026-08-30T16:21:52+08:00
