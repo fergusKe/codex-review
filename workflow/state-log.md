@@ -42,3 +42,13 @@
 - State hash: 6d1cd1810f945a6e0361ecf21ad55f9e8c0a867badeb7a9b6b5ade7eba3b03bf
 - Reason: profile 的 Test database strategy 在送審時仍為 UNKNOWN，approve-spec 拒絕；退回 SPECIFICATION 定案
 
+## 2026-08-30T16:18:21+08:00
+- Actor: machine-verified
+- Action: submit-for-review
+- Change: review-round-runner
+- From: SPECIFICATION
+- To: SPEC_REVIEW
+- Git SHA: f0381bf5fa302143f00415dffe463b5fee25fe22
+- State hash: 1763b1e0bc0309aa5372e4c95654da0a77f689e082ba08e1ab0cc55406ce1f6e
+- Reason: Required OpenSpec artifacts exist
+
