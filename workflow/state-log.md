@@ -298,3 +298,23 @@
 - State hash: 471760756c20b1f07f14fb7de3c177df8c269f38ebae5d6e7f7872fa091a9463
 - Reason: Required OpenSpec artifacts exist
 
+## 2026-08-30T18:25:29+08:00
+- Actor: fergus
+- Action: approve-spec
+- Change: pin-core-manifest
+- From: SPEC_REVIEW
+- To: TEST_DESIGN
+- Git SHA: beb5e457a442299634b0f71ef1b555660fedd397
+- State hash: 15c77c3bba6597beddb8fe66beed2a90dc7abf4593653ee3218c81c1eee157db
+- Reason: Human approved specification; profile digest 6d11e609f2d26f11; spec digest e861919569276228
+
+## 2026-08-30T18:25:48+08:00
+- Actor: fergus
+- Action: approve-tests
+- Change: pin-core-manifest
+- From: TEST_DESIGN
+- To: TEST_DESIGN
+- Git SHA: beb5e457a442299634b0f71ef1b555660fedd397
+- State hash: ec1fa84002efc4bfcb87c1bf7aa1b1dbbf75f6e72830ab20101751f18cd53b9d
+- Reason: Human approved test design; digest 7a37bb71c36733b6
+
