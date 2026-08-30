@@ -145,3 +145,13 @@
 - State hash: c251d4d75f97d2e71d884d7221b776586da9ac9a126e2325b727badc13bfc72b
 - Reason: Human approved test design; digest bda1404936a2b480
 
+## 2026-08-30T17:31:21+08:00
+- Actor: machine-verified
+- Action: start-engineering
+- Change: enable-ci-and-self-use
+- From: TEST_DESIGN
+- To: ENGINEERING
+- Git SHA: 714db0703ef330092ac56ec13750e2975f453473
+- State hash: 493cbaf6953430e8a1c879da76c958711c3b3015d89395f62451c13a21457e2e
+- Reason: Approval prerequisites satisfied; profile digest re-verified
+
