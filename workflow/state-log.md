@@ -278,3 +278,13 @@
 - State hash: 3eced4407363cb858f5589eba4ca0730bf0979a2a099816799984dd738eca6ae
 - Reason: Approval prerequisites satisfied; profile digest re-verified
 
+## 2026-08-30T18:17:56+08:00
+- Actor: ai-or-human
+- Action: revert-to-spec
+- Change: pin-core-manifest
+- From: ENGINEERING
+- To: SPECIFICATION
+- Git SHA: bff4487d19225afb78a5626f87e1f6c1b14850d3
+- State hash: 2ff6786468fff9e9e796c29545fa47cda5e1345dc011296fe3f822e293ea1152
+- Reason: T12 的做法在淺 clone 上讀 HEAD，導致修正它的那個 commit 永遠無法通過 pre-commit
+
