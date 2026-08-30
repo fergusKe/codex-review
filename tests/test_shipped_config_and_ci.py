@@ -32,15 +32,24 @@ def profile_field(name: str) -> str | None:
     return m.group(1).strip('`').strip() if m else None
 
 
+# 本機絕對路徑的起頭。出貨的設定檔含這些，等於把作者的目錄結構寫進 public repo，
+# 而且換一個資料夾名稱就失效。
+ABS_PATH_RE = re.compile(r'/Users/|/home/|/root/|[A-Za-z]:[\\/]')
+
+
 def constraint_is_meaningful(constraint: str) -> bool:
     """T8.3 的判準，抽成函式讓對照組 T8.5 能直接套用在被竄改的內容上。
 
-    要求同時命中「本 repository 的絕對路徑」與「禁止修改的意思」——
+    要求同時命中「禁止修改的意思」與「受審 repository 的範圍指稱」——
     只檢查非空的話，一個寫著 "TODO" 的約束會通過。
+
+    **範圍指稱刻意不綁檔案系統位置。** 第一版判準要求含絕對路徑，
+    結果在 `git worktree` 裡基準線就是紅的，任何非同名的 clone 也一樣 ——
+    見 workflow/test-cases/enable-ci-and-self-use.md 的 T8.3 註記。
     """
-    has_path = str(ROOT) in constraint or ROOT.name in constraint
+    has_scope = any(k in constraint for k in ('本 repository', '本專案', 'codex-review'))
     has_prohibition = any(k in constraint for k in ('不得修改', '不要修改', '禁止修改'))
-    return has_path and has_prohibition
+    return has_scope and has_prohibition
 
 
 class ShippedConfig(unittest.TestCase):
@@ -73,6 +82,23 @@ class ShippedConfig(unittest.TestCase):
         """對照組。沒有這條，T8.3 可以退化成 T8.2 而沒人發現。"""
         self.assertFalse(constraint_is_meaningful('TODO'))
         self.assertFalse(constraint_is_meaningful('請填入約束'))
+        # 只有範圍、沒有禁止；以及只有禁止、沒有範圍 —— 兩者都不該通過。
+        self.assertFalse(constraint_is_meaningful('本 repository 是 codex-review'))
+        self.assertFalse(constraint_is_meaningful('不得修改任何東西'))
+
+    def test_T8_6_constraint_has_no_local_absolute_path(self):
+        """出貨的設定檔會被 clone 到別人的機器上，路徑寫死就失效。
+
+        這條是 T8.3 第一版判準留下的疤：把當時的 bug 變成以後過不去的守衛。
+        """
+        m = ABS_PATH_RE.search(self.raw['constraint'])
+        self.assertIsNone(m, f'constraint 含本機絕對路徑：{m.group(0) if m else ""}')
+        # 判準本身要真的抓得到，否則這是一條永遠綠的斷言。
+        for bad in ('請勿修改 /Users/someone/repo 底下的檔案',
+                    '不得修改 /home/ci/work 的內容',
+                    '不得修改 C:\\src\\proj'):
+            with self.subTest(bad=bad):
+                self.assertIsNotNone(ABS_PATH_RE.search(bad))
 
 
 class TestWorkflow(unittest.TestCase):
