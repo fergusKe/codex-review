@@ -3,7 +3,7 @@
 > `Implementation allowed` 為推導值，不儲存在 STATE：僅當 Phase=ENGINEERING 且 Spec/Test Design 均 approved 時為 true。
 
 Phase: DISCOVERY
-Project mode: UNSET
+Project mode: GREENFIELD
 Active OpenSpec change: none
 Spec approved: no
 Test design approved: no
@@ -12,4 +12,4 @@ Approved by: none
 Approved profile digest: none
 Approved spec digest: none
 Approved test design digest: none
-Last updated: none
+Last updated: 2026-08-30T16:16:53+08:00
