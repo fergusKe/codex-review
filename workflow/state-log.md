@@ -268,3 +268,13 @@
 - State hash: 0eead17197f4647059bc87006924784558bb639c52de787ce00b481321773f86
 - Reason: Human approved test design; digest ff2c2d67f154b4b3
 
+## 2026-08-30T18:13:15+08:00
+- Actor: machine-verified
+- Action: start-engineering
+- Change: pin-core-manifest
+- From: TEST_DESIGN
+- To: ENGINEERING
+- Git SHA: 5f194ff09d7e5d9b34d7096d095dd8875a21de74
+- State hash: 3eced4407363cb858f5589eba4ca0730bf0979a2a099816799984dd738eca6ae
+- Reason: Approval prerequisites satisfied; profile digest re-verified
+
