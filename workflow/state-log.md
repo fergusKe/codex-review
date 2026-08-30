@@ -105,3 +105,13 @@
 - State hash: d41ff2bcb1270717fc709ca772cedfa05c50441bc97ae4e8e44fd5912f8a815f
 - Reason: Evidence complete
 
+## 2026-08-30T17:12:11+08:00
+- Actor: machine-verified
+- Action: start-change
+- Change: enable-ci-and-self-use
+- From: ARCHIVE
+- To: SPECIFICATION
+- Git SHA: 4586a0586c04c9e4240b6497942eec26c0658aa4
+- State hash: 275bdf3fd370ea283bceb02d5e096e96185740138f7f41ca200ac391c0ce4c06
+- Reason: Active change bound
+
