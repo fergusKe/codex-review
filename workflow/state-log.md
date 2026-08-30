@@ -248,3 +248,13 @@
 - State hash: cfcf5522777442faa6892fe6e72f66683fde31de91f4d59f730e0646bbc56e3d
 - Reason: Required OpenSpec artifacts exist
 
+## 2026-08-30T18:02:53+08:00
+- Actor: fergus
+- Action: approve-spec
+- Change: pin-core-manifest
+- From: SPEC_REVIEW
+- To: TEST_DESIGN
+- Git SHA: 9ad516c64129e9fd968a8e542ded25b3151dfd6f
+- State hash: f5a0d0d3c9d244254ebfb00f2caaf9d500b4f8d90acfa363badfd992abc41abe
+- Reason: Human approved specification; profile digest 6d11e609f2d26f11; spec digest 61a44982fc982946
+
