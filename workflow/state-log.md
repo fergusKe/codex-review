@@ -135,3 +135,13 @@
 - State hash: dbc4185a7d1ccbc2f070950c24a1c14a5ea9c86820a60017f70023c2db9e2ae1
 - Reason: Human approved specification; profile digest 6d11e609f2d26f11; spec digest 285b716a51986815
 
+## 2026-08-30T17:31:02+08:00
+- Actor: fergus
+- Action: approve-tests
+- Change: enable-ci-and-self-use
+- From: TEST_DESIGN
+- To: TEST_DESIGN
+- Git SHA: abee3b5624e45c7facab3157a0df9bb443c1035a
+- State hash: c251d4d75f97d2e71d884d7221b776586da9ac9a126e2325b727badc13bfc72b
+- Reason: Human approved test design; digest bda1404936a2b480
+

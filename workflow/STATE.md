@@ -6,10 +6,10 @@ Phase: TEST_DESIGN
 Project mode: GREENFIELD
 Active OpenSpec change: enable-ci-and-self-use
 Spec approved: yes
-Test design approved: no
+Test design approved: yes
 Verification passed: no
 Approved by: fergus
 Approved profile digest: 6d11e609f2d26f116d551a881ceb8b3d5a17da6616605106ca46fa6569528297
 Approved spec digest: 285b716a5198681594e1bc9fa5b4304fc4fbf75dd29ee7b48b1011b5d7a71378
-Approved test design digest: none
-Last updated: 2026-08-30T17:26:57+08:00
+Approved test design digest: bda1404936a2b480a1cfded50e08b8443f83ded25f03ca5d1be94453e07af11b
+Last updated: 2026-08-30T17:31:02+08:00
